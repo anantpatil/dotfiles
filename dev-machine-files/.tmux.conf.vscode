@@ -1,0 +1,81 @@
+# Settings courtesy internet
+# Pragmatic tmux book by Juan Matinez
+
+# Bind C-a (Ctrl+a) to default action on tmux
+set-option -g prefix C-a
+unbind C-b
+
+# Command sequence for nested tmux when running tmux inside another tmux, you
+# need to send command to inner tmux
+bind-key a send-prefix
+
+# C-a C-a for last active window
+bind-key C-a last-window
+
+# set vi type keys
+# setw = set-window option
+setw -g mode-keys vi
+
+# Set the repeat-time to 1 second so that multiple commands can be entered
+# without sending the prefix-key within 1 second. Commands are made repeatable
+# by -r option of bind-key. By default it is 500 ms.
+set -g repeat-time 1000
+
+# Selecting next pane using table
+# -r is to enable repeat of command without need for pressing prefix again
+# By default, repeat time is 500ms which can be changed using repeat-time option
+# to a higher value.
+# Tab is repeatable, within 500ms delay...
+bind-key -r Tab select-pane -t :.+
+
+# Use vim keys for splitting
+bind s split-window -v
+bind v split-window -h
+
+# Use vim type keys for navigating between windows
+bind h select-pane -L
+bind l select-pane -R
+bind k select-pane -U
+bind j select-pane -D
+
+# Use vim type keys for re-sizing panes
+bind -r < resize-pane -L 1
+bind -r > resize-pane -R 1
+bind -r - resize-pane -D 1
+bind -r + resize-pane -U 1
+
+# 256 colors
+# This causes some problem on some systems...
+# set -g default-terminal "screen-256color"
+#set -g default-terminal "xterm-color"
+
+# starting window numbering at 1
+set -g base-index 1
+
+# Setting pane base index to 1, doesn't work wih tmux 1.3.
+setw -g pane-base-index 1
+
+# Faster command sequence, no delay is sending command
+set -sg escape-time 0
+
+# Aggressive resize
+setw -g aggressive-resize off
+
+# Monitor window activity
+setw -g monitor-activity on
+set -g visual-activity on
+
+# Automatic rename
+setw -g automatic-rename on
+
+# Binding r to reload this config file
+# \; is used to combine commands to single action
+bind r source-file ~/.tmux.conf \; display "Reloading config..."
+
+set -g window-active-style 'bg=colour235,fg=colour253'
+set -g window-style 'bg=colour235,fg=colour253'
+set -g pane-border-style 'bg=colour235, fg=colour59'
+set -g pane-active-border-style 'bg=colour235, fg=colour59'
+set -g status-style 'bg=colour32, fg=colour15'
+set -g window-status-style 'bg=default, fg=default'
+set -g window-status-current-style 'bg=colour39, fg=default'

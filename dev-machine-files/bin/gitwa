@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# set -o
+set -x
+
+OLD_PWD=$PWD
+cd $HOME/avinetworks/avi-dev
+
+if [ "$#" -ne 2 ]; then
+    echo -n "Pass Jira ID and branch name"
+    exit 1
+fi
+
+br=`echo $2 | tr '.' '-'`
+ws=$1-$br
+echo "Workspace is $ws"
+git worktree add ../$ws -b $ws  origin/$2
+
+# pull rebase
+echo "Rebasing to latest $2"
+cd $HOME/avinetworks/$ws
+git pull --rebase origin $2
+
+cd $OLD_PWD

@@ -1,0 +1,30 @@
+[user]
+        name = Anant Patil
+        email = patilan@vmware.com
+[core]
+        editor = vim
+        compression = 0
+        excludesfile = ~/.gitignore
+        pager = delta
+[merge]
+        tool = vimdiff
+[push]
+        default = current
+[pull]
+        default = current
+[url "https://"]
+        insteadOf = git://
+[http]
+        sslVerify = false
+        postBuffer = 524288000
+[credential]
+        helper = cache --timeout=360000
+[pager]
+        branch = false
+[delta]
+        plus-color = "#012800"
+        minus-color = "#340001"
+        syntax-theme = Monokai Extended
+
+[interactive]
+        diffFilter = delta --color-only

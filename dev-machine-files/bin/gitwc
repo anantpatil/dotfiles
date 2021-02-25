@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# set -e
+set -x
+
+OLD_PWD=$PWD
+cd $HOME/avinetworks/avi-dev
+
+for var
+do
+    echo -e "Removing $var\n"
+    sudo rm -rf ../$var
+done
+
+git worktree prune
+
+for var
+do
+    echo -e "Cleaning up branch $var\n"
+    git branch -D $var && git push origin --delete $var
+done
+
+cd $OLD_PWD
