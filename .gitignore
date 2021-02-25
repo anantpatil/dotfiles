@@ -1,0 +1,11 @@
+.devenv.sh
+.idea
+.swp
+.swo
+**/.cache/**
+nohup.out
+.pyc
+**/*__pycache__*/**
+**/thirdparty/*
+avitest_*.log
+todo.txt

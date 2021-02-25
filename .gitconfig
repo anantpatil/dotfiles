@@ -1,0 +1,22 @@
+[user]
+        name = Anant Patil
+	email = patilan@vmware.com
+[core]
+        editor = vim
+        compression = 0
+	excludesfile = ~/.gitignore
+[merge]
+        tool = vimdiff
+[push]
+        default = current
+[pull]
+        default = current
+[url "https://"]
+        insteadOf = git://
+[http]
+        sslVerify = false
+        postBuffer = 524288000
+[credential]
+        helper = cache --timeout=360000
+[pager]
+	branch = false
