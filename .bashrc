@@ -1,11 +1,10 @@
 # Path to your oh-my-bash installation.
-export OSH=/Users/patilan/.oh-my-bash
+export OSH=/opt/adminuser/.oh-my-bash
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-OSH_THEME="font"
-# OSH_THEME='random'
-# OSH_THEME='robbyrussell'
+# OSH_THEME="font"
+OSH_THEME="purity"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -70,7 +69,6 @@ aliases=(
 plugins=(
   git
   bashmarks
-  osx
 )
 
 source $OSH/oh-my-bash.sh
@@ -103,8 +101,7 @@ source $OSH/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 
-############## Anant's custom config ##################################
-set -o vi
+################# Anant's custom config ###############################
 export VISUAL=vim
 export GIT_EDITOR=$VISUAL
 export EDITOR=$VISUAL
@@ -180,7 +177,8 @@ findinfile ()
 
     #find . -type f -exec grep -iHn "$1" '{}' \;
 
-    ggrep -isrn --binary-files=without-match --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
+    # ggrep -isrn --binary-files=without-match --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
+    grep -isrn --binary-files=without-match --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
 }
 
 findpyfiles ()
@@ -191,7 +189,8 @@ findpyfiles ()
     fi
 
     #find . -name "*.py" -type f -exec grep -iHn "$1" '{}' \;
-    ggrep -iIsrn --include=*.py --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
+    # ggrep -iIsrn --include=*.py --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
+    grep -iIsrn --include=*.py --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
 }
 
 findgofiles ()
@@ -224,10 +223,10 @@ export LANG=en_US.UTF-8
 # git command autocompletion script
 # For git completion in zsh, git-completion.bash is requited:
 # Find doc: https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
-# source ~/bin/git-completion.bash
+source ~/bin/git-completion.bash
 # zstyle ':completion:*:*:git:*' script ~/bin/git-completion.zsh
-# fpath=(~/.zsh $fpath)
-# source ~/bin/git-prompt.sh
+#fpath=(~/.zsh $fpath)
+source ~/bin/git-prompt.sh
 
 # git commamands simplified
 alias gits='git status'
@@ -240,6 +239,8 @@ alias gpl='git pull'
 alias gpu='git push'
 alias glg='git log --date-order --all --graph --format="%C(green)%h%Creset %C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset%s"'
 alias glg2='git log --date-order --all --graph --name-status --format="%C(green)%H%Creset %C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset%s"'
+alias gcp='git cherry-pick'
+alias gcpt='git cherry-pick --strategy=recursive -X theirs'
 
 # ls alias for color-mode
 #alias lh='ls -lhaG'
@@ -269,6 +270,8 @@ alias grep='grep --color=auto'
 # processes
 alias ps='ps -ax'
 
+export PATH=$PATH:$HOME/bin    # May be redundant; check ~/.bash_profile, /etc/profile, /etc/paths, /etc/bashrc
+
 # Show dirty state in prompt when in Git repos
 export GIT_PS1_SHOWDIRTYSTATE=1
 
@@ -277,9 +280,10 @@ alias t='todo.sh -d ~/.todo/config'
 # FOllowing needed for mtr to run
 # You still need to run using sudo
 
-# alias os='source ~/work/avi-dev/avi-dev-venv/bin/activate && source ~/work/openstack-resources/admin-openrc-os-controller.sh'
-alias ose='source ~/os-venv/bin/activate && source ~/admin-openrc.sh'
+# alias ose='source ~/work/avi-dev/avi-dev-venv/bin/activate && source ~/work/openstack-resources/admin-openrc-os-controller.sh'
+alias ose='source ~/os-venv3/bin/activate && source ~/openrc-files/admin-openrc.sh'
 alias os=openstack
+# alias ossl='os server list --all-projects -c Name -c Status -c Networks'
 alias ossl='os server list --all-projects --fit-width'
 alias osss='os server show --fit-width'
 
@@ -289,27 +293,33 @@ alias tm=tmux
 alias t=tmux
 
 export PYTHONHTTPSVERIFY=0
+export PATH=$PATH:/opt/adminuser/.local/bin
+export PATH=$PATH:/opt/adminuser/.fzf/bin
 
-alias ad='ssh adminuser@avi-dev'
-alias ad2='ssh adminuser@avi-dev-2'
-alias c2='ssh admin@controller2'
 alias c1='ssh admin@controller1'
+alias c2='ssh admin@controller2'
 
-export PATH=$PATH:/usr/local/Cellar/mtr/0.93_1/sbin/
+alias diff=colordiff
 
-# If you need to have openssl@1.1 first in your PATH run:
-export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
-
-# For compilers to find openssl@1.1 you may need to set:
-export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
-
-export PATH=$PATH:/usr/local/Cellar/speedtest-cli/2.1.2/bin/
-
-# All shells get their own history; easy to navigate and find command
-# THIS SHOULD BE LAST LINE FOR IT TO WORK
+# Keep this as last option
 # unsetopt share_history
+. /mnt/builds/pr-builder/bash_sources/.bashrc-container
 
-export WORK=$HOME/work
-export GOPATH="${WORK}/go"
-export PATH=$GOPATH/bin:$PATH
+# Copied from samoshkin
+export FZF_DEFAULT_OPTS="--no-mouse --height 80% --reverse --multi --info=inline --preview='$HOME/.vim/plugged/fzf.vim/bin/preview.sh {}' --preview-window='right:60%:wrap' --bind='f2:toggle-preview,f3:execute(bat --style=numbers {} || less -f {}),ctrl-o:execute($EDITOR {}),alt-w:toggle-preview-wrap,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-x:execute(rm -i {+})+abort,ctrl-l:clear-query'"
+
+# export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard 2>/dev/null || fd --type f --type l $FD_OPTIONS"
+
+# Use ripgrep for fzf
+# export INITIAL_QUERY=""
+# export RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+#export FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY' fzf --bind "change:reload:$RG_PREFIX {q} || true" --ansi --disabled --query "$INITIAL_QUERY" --height=50% --layout=reverse
+
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
+export MANPATH="/usr/local/share/fzf/man:$MANPATH"
+
+alias less=bat
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
