@@ -232,7 +232,8 @@ source ~/bin/git-completion.bash
 source ~/bin/git-prompt.sh
 
 # git commamands simplified
-alias gits='git status'
+# alias gits='git status'
+alias gits='git status --procelain -b'
 alias gco='git checkout'
 alias gci='git commit'
 alias grb='git rebase'
@@ -284,7 +285,7 @@ alias t='todo.sh -d ~/.todo/config'
 # You still need to run using sudo
 
 # alias ose='source ~/work/avi-dev/avi-dev-venv/bin/activate && source ~/work/openstack-resources/admin-openrc-os-controller.sh'
-alias ose='source ~/os-venv3/bin/activate && source ~/openrc-files/admin-openrc.sh'
+alias ose='source ~/os-venv/bin/activate && source ~/openrc-files/admin-openrc.sh'
 alias os=openstack
 # alias ossl='os server list --all-projects -c Name -c Status -c Networks'
 alias ossl='os server list --all-projects --fit-width'

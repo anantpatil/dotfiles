@@ -25,8 +25,10 @@
         # plus-color = "#012800"
         # minus-color = "#340001"
         # syntax-theme = Monokai Extended
-        features = side-by-side line-numbers decorations
-        whitespace-error-style = 22 reverse
+        # features = side-by-side line-numbers decorations
+        # whitespace-error-style = 22 reverse
+        features = line-numbers decorations
+        syntax-theme = gruvbox
 
 [interactive]
         diffFilter = delta --color-only
