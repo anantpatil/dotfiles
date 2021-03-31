@@ -295,11 +295,19 @@ alias t=tmux
 export PYTHONHTTPSVERIFY=0
 export PATH=$PATH:/opt/adminuser/.local/bin
 export PATH=$PATH:/opt/adminuser/.fzf/bin
+export FZF_DEFAULT_OPTS="--no-mouse --height 80% --reverse --multi --info=inline --preview='$HOME/.config/nvim/plugged/fzf.vim/bin/preview.sh {}' --preview-window='right:60%:wrap' --bind='f2:toggle-preview,f3:execute(bat --style=numbers {} || less -f {}),ctrl-o:execute($EDITOR {}),alt-w:toggle-preview-wrap,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-x:execute(rm -i {+})+abort,ctrl-l:clear-query'"
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
+export MANPATH="/usr/local/share/fzf/man:$MANPATH"
 
+alias less=bat
 alias c1='ssh admin@controller1'
 alias c2='ssh admin@controller2'
 
 alias diff=colordiff
+alias vi=nvim
+alias vim=nvim
 
 # Keep this as last option
 # unsetopt share_history
