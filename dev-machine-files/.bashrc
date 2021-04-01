@@ -229,7 +229,8 @@ source ~/bin/git-completion.bash
 source ~/bin/git-prompt.sh
 
 # git commamands simplified
-alias gits='git status'
+# alias gits='git status'
+alias gits='git status --porcelain -b'
 alias gco='git checkout'
 alias gci='git commit'
 alias grb='git rebase'
