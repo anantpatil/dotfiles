@@ -22,9 +22,18 @@
 [pager]
         branch = false
 [delta]
-        plus-color = "#012800"
-        minus-color = "#340001"
-        syntax-theme = Monokai Extended
+        # plus-color = "#012800"
+        # minus-color = "#340001"
+        # syntax-theme = Monokai Extended
+        # features = side-by-side line-numbers decorations
+        features = line-numbers decorations
+        # whitespace-error-style = 22 reverse
+        syntax-theme = gruvbox
 
 [interactive]
         diffFilter = delta --color-only
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
