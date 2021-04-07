@@ -102,11 +102,12 @@ source $OSH/oh-my-bash.sh
 # alias ohmybash="mate ~/.oh-my-bash"
 
 ################# Anant's custom config ###############################
-export VISUAL=vim
+export VISUAL=nvim
 export GIT_EDITOR=$VISUAL
 export EDITOR=$VISUAL
-# vim is our vi
-alias vi=vim
+# nvim is our vi
+alias vi=nvim
+alias vim=nvim
 
 alias lsd="ls -G -d */"
 # list ONLY files in current directory
@@ -313,3 +314,7 @@ alias vim=nvim
 # Keep this as last option
 # unsetopt share_history
 . /mnt/builds/pr-builder/bash_sources/.bashrc-container
+
+export FZF_DEFAULT_OPTS="--no-mouse --height 80% --reverse --multi --info=inline --preview='$HOME/.vim/plugged/fzf.vim/bin/preview.sh {}' --preview-window='right:60%:wrap' --bind='f2:toggle-preview,f3:execute(bat --style=numbers {} || less -f {}),ctrl-o:execute($EDITOR {}),alt-w:toggle-preview-wrap,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-x:execute(rm -i {+})+abort,ctrl-l:clear-query'"
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+

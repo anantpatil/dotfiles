@@ -2,7 +2,7 @@
         name = Anant Patil
         email = patilan@vmware.com
 [core]
-        editor = vim
+        editor = nvim
         compression = 0
         excludesfile = ~/.gitignore
         pager = delta
