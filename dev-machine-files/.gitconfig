@@ -5,7 +5,7 @@
         editor = nvim
         compression = 0
         excludesfile = ~/.gitignore
-        pager = delta
+        # pager = delta
 [merge]
         tool = vimdiff
 [push]
@@ -28,10 +28,10 @@
         # features = side-by-side line-numbers decorations
         features = line-numbers decorations
         # whitespace-error-style = 22 reverse
-        syntax-theme = gruvbox
+        # syntax-theme = gruvbox
 
 [interactive]
-        diffFilter = delta --color-only
+        # diffFilter = delta --color-only
 
 [delta "decorations"]
     commit-decoration-style = bold yellow box ul

@@ -4,7 +4,10 @@ export OSH=/opt/adminuser/.oh-my-bash
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
 # OSH_THEME="font"
-OSH_THEME="purity"
+#OSH_THEME="minimal"
+# OSH_THEME="purity"
+# OSH_THEME="random"
+OSH_THEME="iterate"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -230,8 +233,8 @@ source ~/bin/git-completion.bash
 source ~/bin/git-prompt.sh
 
 # git commamands simplified
-# alias gits='git status'
-alias gits='git status --porcelain -b'
+# alias gits='git status --porcelain -b'
+alias gits='git status'
 alias gco='git checkout'
 alias gci='git commit'
 alias grb='git rebase'
@@ -284,10 +287,10 @@ alias t='todo.sh -d ~/.todo/config'
 
 # alias ose='source ~/work/avi-dev/avi-dev-venv/bin/activate && source ~/work/openstack-resources/admin-openrc-os-controller.sh'
 alias ose='source ~/os-venv3/bin/activate && source ~/openrc-files/admin-openrc.sh'
-alias os=openstack
-# alias ossl='os server list --all-projects -c Name -c Status -c Networks'
-alias ossl='os server list --all-projects --fit-width'
-alias osss='os server show --fit-width'
+alias o=openstack
+function os { openstack $* --fit-width; }
+alias ossl='os server list --all-projects'
+alias osss='os server show'
 
 alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no 2>/dev/null'
 
@@ -318,3 +321,11 @@ alias vim=nvim
 export FZF_DEFAULT_OPTS="--no-mouse --height 80% --reverse --multi --info=inline --preview='$HOME/.vim/plugged/fzf.vim/bin/preview.sh {}' --preview-window='right:60%:wrap' --bind='f2:toggle-preview,f3:execute(bat --style=numbers {} || less -f {}),ctrl-o:execute($EDITOR {}),alt-w:toggle-preview-wrap,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-x:execute(rm -i {+})+abort,ctrl-l:clear-query'"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# go path is in /usr/local/go/bin - check golang linux install guide
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+export MYVIMRC=$HOME/.config/nvim/vimrc
+
+alias sb='source ~/.bashrc'
