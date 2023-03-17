@@ -6,6 +6,7 @@
         compression = 0
         excludesfile = ~/.gitignore
         pager = delta
+        # pager = colordiff
 [merge]
         tool = vimdiff
 [push]
@@ -19,21 +20,26 @@
         postBuffer = 524288000
 [credential]
         helper = cache --timeout=360000
+
 [pager]
-        branch = false
-[delta]
-        # plus-color = "#012800"
-        # minus-color = "#340001"
-        # syntax-theme = Monokai Extended
-        # features = side-by-side line-numbers decorations
-        # whitespace-error-style = 22 reverse
-        features = line-numbers decorations
-        syntax-theme = gruvbox
+    branch = false
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
 
 [interactive]
-        diffFilter = delta --color-only
+    diffFilter = delta --color-only
+
+[delta]
+    # features = side-by-side line-numbers decorations
+    features = line-numbers
+    # whitespace-error-style = 22 reverse
+    # syntax-theme = Monokai Extended
+    # syntax-theme = ansi
+    syntax-theme = zenburn
 
 [delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
+    # commit-decoration-style = bold yellow box ul
+    # file-style = bold yellow ul
+    # file-decoration-style = none

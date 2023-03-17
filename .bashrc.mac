@@ -1,12 +1,15 @@
-# Path to your oh-my-bash installation.
+
 export OSH=$HOME/.oh-my-bash
+
+# Path to your oh-my-bash installation.
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
 # OSH_THEME="font"
-OSH_THEME="purity"
+# OSH_THEME="purity"
 # OSH_THEME='random'
 # OSH_THEME='robbyrussell'
+OSH_THEME='iterate'
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -71,7 +74,6 @@ aliases=(
 plugins=(
   git
   bashmarks
-  osx
 )
 
 source $OSH/oh-my-bash.sh
@@ -105,6 +107,9 @@ source $OSH/oh-my-bash.sh
 # alias ohmybash="mate ~/.oh-my-bash"
 
 ################# Anant's custom config ###############################
+export PATH=/usr/local/opt/openssl@1.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/patilan/bin:/Users/patilan/.local/bin:/Users/patilan/.fzf/bin:/usr/local/Cellar/mtr/0.93_1/sbin/
+# mtr program, better traceroute
+export PATH=$PATH:/usr/local/Cellar/mtr/0.95/sbin/
 export VISUAL=nvim
 export GIT_EDITOR=$VISUAL
 export EDITOR=$VISUAL
@@ -245,6 +250,7 @@ alias glg='git log --date-order --all --graph --format="%C(green)%h%Creset %C(ye
 alias glg2='git log --date-order --all --graph --name-status --format="%C(green)%H%Creset %C(yellow)%an%Creset %C(blue bold)%ar%Creset %C(red bold)%d%Creset%s"'
 alias gcp='git cherry-pick'
 alias gcpt='git cherry-pick --strategy=recursive -X theirs'
+alias gfm='git fetch && git merge'
 
 # ls alias for color-mode
 #alias lh='ls -lhaG'
@@ -285,8 +291,10 @@ alias t='todo.sh -d ~/.todo/config'
 # You still need to run using sudo
 
 # alias ose='source ~/work/avi-dev/avi-dev-venv/bin/activate && source ~/work/openstack-resources/admin-openrc-os-controller.sh'
-alias ose='source ~/os-venv/bin/activate && source ~/openrc-files/admin-openrc.sh'
-alias os=openstack
+alias ose='source ~/work/os-venv/bin/activate && source ~/admin-openrc.sh'
+#alias os=openstack
+function os { openstack $* --fit-width; }
+alias o=openstack
 # alias ossl='os server list --all-projects -c Name -c Status -c Networks'
 alias ossl='os server list --all-projects --fit-width'
 alias osss='os server show --fit-width'
@@ -302,6 +310,7 @@ export PATH=$PATH:$HOME/.fzf/bin
 
 alias ad='ssh adminuser@avi-dev'
 alias ad2='ssh adminuser@avi-dev-2'
+alias ad3='ssh adminuser@avi-dev-3'
 alias c2='ssh admin@controller2'
 
 alias diff=colordiff
@@ -345,3 +354,8 @@ export PATH=$GOPATH/bin:$PATH
 export VIMRC=~/.config/nvim/vimrc¬
 alias vi=nvim
 alias vim=nvim
+
+alias notes='cd ~/OneDrive\ -\ VMware\,\ Inc/work/notes/'
+alias journal='open ~/OneDrive\ -\ VMware\,\ Inc/work/notes/journal.txt'
+
+alias sb='source ~/.bashrc'
