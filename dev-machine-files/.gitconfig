@@ -2,9 +2,10 @@
         name = Anant Patil
         email = patilan@vmware.com
 [core]
-        editor = nvim
+        editor = vim
         compression = 0
         excludesfile = ~/.gitignore
+	pager = bat -
         # pager = delta
 [merge]
         tool = vimdiff

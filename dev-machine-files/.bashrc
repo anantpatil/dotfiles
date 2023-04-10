@@ -276,6 +276,7 @@ alias grep='grep --color=auto'
 alias ps='ps -ax'
 
 export PATH=$PATH:$HOME/bin    # May be redundant; check ~/.bash_profile, /etc/profile, /etc/paths, /etc/bashrc
+export PATH=/opt/adminuser/gitlab/patilan/utils/bin:$PATH
 
 # Show dirty state in prompt when in Git repos
 export GIT_PS1_SHOWDIRTYSTATE=1
@@ -327,5 +328,6 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 export MYVIMRC=$HOME/.config/nvim/vimrc
+export VIM_COLOR=dark
 
 alias sb='source ~/.bashrc'
