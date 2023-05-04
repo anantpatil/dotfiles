@@ -5,7 +5,7 @@
         editor = vim
         compression = 0
         excludesfile = ~/.gitignore
-	pager = bat -
+	      # pager = bat -
         # pager = delta
 [merge]
         tool = vimdiff

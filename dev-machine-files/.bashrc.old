@@ -1,11 +1,13 @@
 # Path to your oh-my-bash installation.
-export OSH=$HOME/.oh-my-bash
+export OSH=/opt/adminuser/.oh-my-bash
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
 # OSH_THEME="font"
-#OSH_THEME="purity"
-OSH_THEME='iterate'
+#OSH_THEME="minimal"
+# OSH_THEME="purity"
+# OSH_THEME="random"
+OSH_THEME="iterate"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -106,8 +108,9 @@ source $OSH/oh-my-bash.sh
 export VISUAL=nvim
 export GIT_EDITOR=$VISUAL
 export EDITOR=$VISUAL
-# vim is our vi
+# nvim is our vi
 alias vi=nvim
+alias vim=nvim
 
 alias lsd="ls -G -d */"
 # list ONLY files in current directory
@@ -142,10 +145,8 @@ fi
 # git aliases
 alias 'gitr'='git review -v'
 #alias 'gits'='git status'
-#alias 'gitl'='git log --oneline'
-alias gitl="git log --pretty=format:'%Cred%h%Creset %C(bold blue)%an%Creset %Cgreen%cr%Creset %s%C(bold red)%d%Creset'"
-#alias 'gitll'='git log --name-status'
-alias gitll="git log --pretty=format:'%Cred%h%Creset %C(bold blue)%an%Creset %Cgreen%cr%Creset %s%C(bold red)%d%Creset' --name-status"
+alias 'gitl'='git log --oneline'
+alias 'gitll'='git log --name-status'
 alias 'gitlg'='git log --oneline --graph --decorate --abbrev-commit --all'
 alias 'gitl1'='git log -1'
 alias 'gitd'='git diff'
@@ -232,6 +233,7 @@ source ~/bin/git-completion.bash
 source ~/bin/git-prompt.sh
 
 # git commamands simplified
+# alias gits='git status --porcelain -b'
 alias gits='git status'
 alias gco='git checkout'
 alias gci='git commit'
@@ -274,7 +276,7 @@ alias grep='grep --color=auto'
 alias ps='ps -ax'
 
 export PATH=$PATH:$HOME/bin    # May be redundant; check ~/.bash_profile, /etc/profile, /etc/paths, /etc/bashrc
-export PATH=$HOME/gitlab/patilan/utils/bin:$PATH
+export PATH=/opt/adminuser/gitlab/patilan/utils/bin:$PATH
 
 # Show dirty state in prompt when in Git repos
 export GIT_PS1_SHOWDIRTYSTATE=1
@@ -286,10 +288,10 @@ alias t='todo.sh -d ~/.todo/config'
 
 # alias ose='source ~/work/avi-dev/avi-dev-venv/bin/activate && source ~/work/openstack-resources/admin-openrc-os-controller.sh'
 alias ose='source ~/os-venv3/bin/activate && source ~/openrc-files/admin-openrc.sh'
-alias os=openstack
-# alias ossl='os server list --all-projects -c Name -c Status -c Networks'
-alias ossl='os server list --all-projects --fit-width'
-alias osss='os server show --fit-width'
+alias o=openstack
+function os { openstack $* --fit-width; }
+alias ossl='os server list --all-projects'
+alias osss='os server show'
 
 alias ssh='ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no 2>/dev/null'
 
@@ -297,42 +299,35 @@ alias tm=tmux
 alias t=tmux
 
 export PYTHONHTTPSVERIFY=0
-export PATH=$PATH:$HOME/.local/bin
-export PATH=$PATH:$HOME/.fzf/bin
-
-alias c1='ssh admin@controller1'
-alias c2='ssh admin@controller2'
-
-alias diff=colordiff
-
-# Keep this as last option
-# unsetopt share_history
-# . /mnt/builds/pr-builder/bash_sources/.bashrc-container
-
-# Copied from samoshkin
-#export FZF_DEFAULT_OPTS="--no-mouse --height 80% --reverse --multi --info=inline --preview='$HOME/.vim/plugged/fzf.vim/bin/preview.sh {}' --preview-window='right:60%:wrap' --bind='f2:toggle-preview,f3:execute(bat --style=numbers {} || less -f {}),ctrl-o:execute($EDITOR {}),alt-w:toggle-preview-wrap,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-x:execute(rm -i {+})+abort,ctrl-l:clear-query'"
+export PATH=$PATH:/opt/adminuser/.local/bin
+export PATH=$PATH:/opt/adminuser/.fzf/bin
 export FZF_DEFAULT_OPTS="--no-mouse --height 80% --reverse --multi --info=inline --preview='$HOME/.config/nvim/plugged/fzf.vim/bin/preview.sh {}' --preview-window='right:60%:wrap' --bind='f2:toggle-preview,f3:execute(bat --style=numbers {} || less -f {}),ctrl-o:execute($EDITOR {}),alt-w:toggle-preview-wrap,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-x:execute(rm -i {+})+abort,ctrl-l:clear-query'"
-
-# export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard 2>/dev/null || fd --type f --type l $FD_OPTIONS"
-
-# Use ripgrep for fzf
-# export INITIAL_QUERY=""
-# export RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
-#export FZF_DEFAULT_COMMAND="$RG_PREFIX '$INITIAL_QUERY' fzf --bind "change:reload:$RG_PREFIX {q} || true" --ansi --disabled --query "$INITIAL_QUERY" --height=50% --layout=reverse
-
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 export MANPATH="/usr/local/share/fzf/man:$MANPATH"
 
-alias less="bat -p"
+alias less=bat
+alias c1='ssh admin@controller1'
+alias c2='ssh admin@controller2'
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-export VIMRC=~/.config/nvim/vimrc¬
+alias diff=colordiff
 alias vi=nvim
 alias vim=nvim
-# BAT_THEME also controls VIM colorscheme; see .vimrc
-export BAT_THEME=GitHub
-#export BAT_THEME='Sublime Snazzy'
+
+# Keep this as last option
+# unsetopt share_history
 . /mnt/builds/pr-builder/bash_sources/.bashrc-container
+
+export FZF_DEFAULT_OPTS="--no-mouse --height 80% --reverse --multi --info=inline --preview='$HOME/.vim/plugged/fzf.vim/bin/preview.sh {}' --preview-window='right:60%:wrap' --bind='f2:toggle-preview,f3:execute(bat --style=numbers {} || less -f {}),ctrl-o:execute($EDITOR {}),alt-w:toggle-preview-wrap,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-y:execute-silent(echo {+} | pbcopy),ctrl-x:execute(rm -i {+})+abort,ctrl-l:clear-query'"
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# go path is in /usr/local/go/bin - check golang linux install guide
+export PATH=$PATH:/usr/local/go/bin
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
+export MYVIMRC=$HOME/.config/nvim/vimrc
+export VIM_COLOR=dark
+
+alias sb='source ~/.bashrc'
