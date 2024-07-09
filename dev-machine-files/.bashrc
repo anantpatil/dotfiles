@@ -3,9 +3,10 @@ export OSH=$HOME/.oh-my-bash
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
-# OSH_THEME="font"
+#OSH_THEME="font"
 #OSH_THEME="purity"
-OSH_THEME='iterate'
+#OSH_THEME='iterate'
+OSH_THEME='minimal'
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -106,8 +107,11 @@ source $OSH/oh-my-bash.sh
 export VISUAL=nvim
 export GIT_EDITOR=$VISUAL
 export EDITOR=$VISUAL
+
 # vim is our vi
-alias vi=nvim
+# /opt/adminuser/gitlab/patilan/utils/bin/myvi is the script
+alias vi=myvi
+alias vim=myvi
 
 alias lsd="ls -G -d */"
 # list ONLY files in current directory
@@ -115,6 +119,8 @@ alias lsf="find . -maxdepth 1 -type f -print"
 # alias ls='ls -GF'
 alias ls='ls -F'
 alias cls='clear'
+# print all files reverse order of access time
+alias l='ls -alrtp'
 xtitle() { echo -ne "\033]0;${*}\a"; }
 
 #alias gvim='gvim -geom 120x48+96+96'
@@ -273,6 +279,7 @@ alias grep='grep --color=auto'
 # processes
 alias ps='ps -ax'
 
+export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:$HOME/bin    # May be redundant; check ~/.bash_profile, /etc/profile, /etc/paths, /etc/bashrc
 export PATH=$HOME/gitlab/patilan/utils/bin:$PATH
 
@@ -304,6 +311,9 @@ alias c1='ssh admin@controller1'
 alias c2='ssh admin@controller2'
 
 alias diff=colordiff
+alias vimdiff='nvim -d'
+alias nvimdiff='nvim -d'
+alias gitdd='git difftool'
 
 # Keep this as last option
 # unsetopt share_history
@@ -315,6 +325,7 @@ export FZF_DEFAULT_OPTS="--no-mouse --height 80% --reverse --multi --info=inline
 
 # export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard 2>/dev/null || fd --type f --type l $FD_OPTIONS"
 
+alias ripgrep=rg
 # Use ripgrep for fzf
 # export INITIAL_QUERY=""
 # export RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
@@ -326,13 +337,20 @@ export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 export MANPATH="/usr/local/share/fzf/man:$MANPATH"
 
 alias less="bat -p"
+alias cat=bat
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export VIMRC=~/.config/nvim/vimrc¬
-alias vi=nvim
-alias vim=nvim
 # BAT_THEME also controls VIM colorscheme; see .vimrc
 export BAT_THEME=GitHub
 #export BAT_THEME='Sublime Snazzy'
-. /mnt/builds/pr-builder/bash_sources/.bashrc-container
+
+# following is needed for avi build container
+#. /mnt/builds/pr-builder/bash_sources/.bashrc-container
+# this is updated script to work with Ubuntu newer versions
+# if the create_buildenv doesn't work then try to source the original bash container script above
+source ~/bashrc-container
+
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$PATH
