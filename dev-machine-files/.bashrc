@@ -347,10 +347,10 @@ export BAT_THEME=GitHub
 #export BAT_THEME='Sublime Snazzy'
 
 # following is needed for avi build container
-#. /mnt/builds/pr-builder/bash_sources/.bashrc-container
+. /mnt/builds/pr-builder/bash_sources/.bashrc-container
 # this is updated script to work with Ubuntu newer versions
 # if the create_buildenv doesn't work then try to source the original bash container script above
-source ~/bashrc-container
+# source ~/bashrc-container
 
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
