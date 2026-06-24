@@ -104,6 +104,9 @@ source $OSH/oh-my-bash.sh
 # alias ohmybash="mate ~/.oh-my-bash"
 
 ################# Anant's custom config ###############################
+# alias to avi systest host
+alias at='ssh root@avitest'
+
 export VISUAL=nvim
 export GIT_EDITOR=$VISUAL
 export EDITOR=$VISUAL
@@ -137,12 +140,12 @@ alias trun='python -m testtools.run'
 alias ipython='ipython3 --classic --nosep --no-confirm-exit'
 alias h='http --verify no'
 
-if type jq > /dev/null 2>&1;then
-    # psjon using jq
-    alias pjson='jq .'
+if type jq >/dev/null 2>&1; then
+  # psjon using jq
+  alias pjson='jq .'
 else
-    # use good old python
-    alias pjson='python -m json.tool'
+  # use good old python
+  alias pjson='python -m json.tool'
 fi
 
 # git aliases
@@ -151,7 +154,7 @@ alias 'gitr'='git review -v'
 #alias 'gitl'='git log --oneline'
 alias gitl="git log --pretty=format:'%Cred%h%Creset %C(bold blue)%an%Creset %Cgreen%cr%Creset %s%C(bold red)%d%Creset'"
 #alias 'gitll'='git log --name-status'
-alias gitll="git log --pretty=format:'%Cred%h%Creset %C(bold blue)%an%Creset %Cgreen%cr%Creset %s%C(bold red)%d%Creset' --name-status"
+alias gitll="git log --pretty=format:'%Cred%H%Creset %C(bold blue)%an%Creset %Cgreen%cr%Creset %s%C(bold red)%d%Creset' --name-status"
 alias 'gitlg'='git log --oneline --graph --decorate --abbrev-commit --all'
 alias 'gitl1'='git log -1'
 alias 'gitd'='git diff'
@@ -177,52 +180,48 @@ export FORCE=yes
 # for faster building of envs and pip installs
 export PIP_DOWNLOAD_CACHE=~/.pip-cache/pip
 
-findinfile ()
-{
-    if [ -z "$1" ];then
-        echo -e "Search pattern missing.\n"
-        exit
-    fi
+findinfile() {
+  if [ -z "$1" ]; then
+    echo -e "Search pattern missing.\n"
+    exit
+  fi
 
-    #find . -type f -exec grep -iHn "$1" '{}' \;
+  #find . -type f -exec grep -iHn "$1" '{}' \;
 
-    # ggrep -isrn --binary-files=without-match --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
-    grep -isrn --binary-files=without-match --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
+  # ggrep -isrn --binary-files=without-match --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
+  grep -isrn --binary-files=without-match --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
 }
 
-findpyfiles ()
-{
-    if [ -z "$1" ];then
-        echo -e "Search pattern missing.\n"
-        exit
-    fi
+findpyfiles() {
+  if [ -z "$1" ]; then
+    echo -e "Search pattern missing.\n"
+    exit
+  fi
 
-    #find . -name "*.py" -type f -exec grep -iHn "$1" '{}' \;
-    # ggrep -iIsrn --include=*.py --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
-    grep -iIsrn --include=*.py --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
+  #find . -name "*.py" -type f -exec grep -iHn "$1" '{}' \;
+  # ggrep -iIsrn --include=*.py --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
+  grep -iIsrn --include=*.py --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
 }
 
-findgofiles ()
-{
-    if [ -z "$1" ];then
-        echo -e "Search pattern missing.\n"
-        exit
-    fi
+findgofiles() {
+  if [ -z "$1" ]; then
+    echo -e "Search pattern missing.\n"
+    exit
+  fi
 
-    #find . -name "*.go" -type f -exec grep -iHn "$1" '{}' \;
-    ggrep -iIsrn --include=*.go --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
+  #find . -name "*.go" -type f -exec grep -iHn "$1" '{}' \;
+  ggrep -iIsrn --include=*.go --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
 }
 
-findlsfiles ()
-{
-    if [ -z "$1" ];then
-        echo -e "Search pattern
+findlsfiles() {
+  if [ -z "$1" ]; then
+    echo -e "Search pattern
 missing.\n"
-        exit
-    fi
+    exit
+  fi
 
-    #find . -type f -exec grep -il "$1" '{}' \;
-    ggrep -ilsrIH --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
+  #find . -type f -exec grep -il "$1" '{}' \;
+  ggrep -ilsrIH --exclude-dir=.git --exclude-dir=.tox --exclude-dir=.test* --exclude-from=$HOME/.gitignore -e "$1" .
 }
 
 export LC_ALL=en_US.UTF-8
@@ -232,10 +231,10 @@ export LANG=en_US.UTF-8
 # git command autocompletion script
 # For git completion in zsh, git-completion.bash is requited:
 # Find doc: https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh
-source ~/bin/git-completion.bash
+# source ~/bin/git-completion.bash
 # zstyle ':completion:*:*:git:*' script ~/bin/git-completion.zsh
 #fpath=(~/.zsh $fpath)
-source ~/bin/git-prompt.sh
+# source ~/bin/git-prompt.sh
 
 # git commamands simplified
 alias gits='git status'
@@ -280,7 +279,7 @@ alias grep='grep --color=auto'
 alias ps='ps -ax'
 
 export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:$HOME/bin    # May be redundant; check ~/.bash_profile, /etc/profile, /etc/paths, /etc/bashrc
+export PATH=$PATH:$HOME/bin # May be redundant; check ~/.bash_profile, /etc/profile, /etc/paths, /etc/bashrc
 export PATH=$HOME/gitlab/patilan/utils/bin:$PATH
 
 # Show dirty state in prompt when in Git repos
@@ -354,3 +353,28 @@ export BAT_THEME=GitHub
 
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:$PATH
+
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=$MAVEN_HOME/bin:$PATH
+
+# This for using cursor agent cli with given modes
+alias agent='agent --model auto'
+alias opus='agent --model claude-4.6-opus-high'
+alias sonnet='agent --model claude-4.6-sonnet-medium'
+alias gemini='agent --model gemini-3.1-pro'
+alias auto='agent --model auto'
+
+# RTK shit to reduce input tokens to cursor
+if [[ -n $CURSOR_AGENT ]]; then
+  source $HOME/rtk-hook.sh
+fi
+
+export CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1

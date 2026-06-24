@@ -68,6 +68,9 @@ set -g visual-activity on
 # Automatic rename
 setw -g automatic-rename on
 
+# history limit huge
+set-option -g history-limit 10000
+
 # Binding r to reload this config file
 # \; is used to combine commands to single action
 bind r source-file ~/.tmux.conf \; display "Reloading config..."
@@ -127,4 +130,16 @@ bind r source-file ~/.tmux.conf \; display "Reloading config..."
 # If you want Tmux to use the Nova color scheme, ensure you have installed a Nova plugin for your terminal first
 
 set -g default-terminal "xterm-256color"
-set -ga terminal-overrides ",xterm-256color:Tc"
+# set -ga terminal-overrides ",xterm-256color:Tc"
+set-option -ga terminal-overrides ",*-256color*:Tc"
+
+# tmux session persist
+run-shell ~/github/tmux-plugins/tmux-resurrect/resurrect.tmux
+
+# Allow terminal overrides for true color and OSC sequences
+# this will help colorscheme sync for nvim when terminal color bg changes
+# they use OSC11 protocol for this
+set -as terminal-overrides ',xterm*:Tc:Osc11'
+
+# this is setting to override shift-enter to be sent to cursor or claude code CLI
+bind -n S-Enter send-keys Escape "[13;2u"
